@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Community — Home</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-brand">
+    <span class="dot"></span>
+    Tech Community
+  </div>
+  <ul class="nav-links">
+    <li><a href="./index.html" class="active">Home</a></li>
+    <li><a href="./form.html">Daftar</a></li>
+    <li><a href="./gallery.html">Galeri</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">✦ Est. 2025 — Yogyakarta, Indonesia</div>
+  <h1>Bergabung dengan <span class="grad-text">Tech Community</span></h1>
+  <p>Komunitas teknologi terbuka untuk semua orang. Kami berbagi ilmu, berkolaborasi dalam proyek, dan tumbuh bersama di bidang teknologi.</p>
+  <div class="hero-actions">
+    <a href="./form.html" class="btn btn-primary">Daftar Sekarang →</a>
+    <a href="./gallery.html" class="btn btn-outline">Lihat Galeri</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="num" id="totalMember">—</div>
+    <div class="label">Total Anggota</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">5+</div>
+    <div class="label">Bidang Keahlian</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">24</div>
+    <div class="label">Proyek Aktif</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">100%</div>
+    <div class="label">Open Source</div>
+  </div>
+</div>
+
+<!-- TABLE SECTION -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Daftar Anggota</div>
+    <a href="./form.html" class="btn btn-ghost" style="font-size:0.8rem;padding:6px 14px;">+ Tambah Anggota</a>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nama</th>
+          <th>Email</th>
+          <th>Bidang Minat</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="memberTable">
+        <!-- data diisi oleh JS -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Tech Community</span> — Open for everyone</p>
+</footer>
+
+<!-- ===== MODAL POPUP ===== -->
+<div id="modalOverlay" style="
+  position:fixed;inset:0;z-index:999;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  animation:fadeIn 0.3s ease;">
+
+  <div id="modalBox" style="
+    background:#141c2e;
+    border:1px solid #1e2d4a;
+    border-radius:20px;
+    padding:40px;
+    max-width:460px;
+    width:100%;
+    position:relative;
+    animation:slideUp 0.35s ease;">
+
+    <button onclick="closeModal()" style="
+      position:absolute;top:16px;right:16px;
+      background:#1a2236;border:1px solid #1e2d4a;
+      color:#64748b;width:32px;height:32px;
+      border-radius:8px;cursor:pointer;
+      font-size:16px;line-height:1;
+      transition:all 0.2s;">✕</button>
+
+    <div style="
+      width:56px;height:56px;border-radius:14px;
+      background:linear-gradient(135deg,#3b82f6,#06b6d4);
+      display:flex;align-items:center;justify-content:center;
+      font-size:26px;margin-bottom:20px;">👋</div>
+
+    <div style="
+      display:inline-block;
+      background:rgba(59,130,246,0.1);
+      border:1px solid rgba(59,130,246,0.3);
+      color:#3b82f6;padding:3px 12px;
+      border-radius:50px;font-size:0.72rem;
+      font-weight:600;letter-spacing:0.5px;
+      text-transform:uppercase;margin-bottom:12px;
+      font-family:'JetBrains Mono',monospace;">
+      Selamat Datang
+    </div>
+
+    <h2 style="
+      font-size:1.5rem;font-weight:700;
+      letter-spacing:-0.5px;margin-bottom:10px;
+      color:#e2e8f0;">
+      Halo! Selamat datang di<br>
+      <span style="background:linear-gradient(135deg,#3b82f6,#06b6d4);
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        background-clip:text;">Tech Community 🚀</span>
+    </h2>
+
+    <p style="color:#94a3b8;font-size:0.875rem;line-height:1.7;margin-bottom:24px;">
+      Platform komunitas teknologi terbuka untuk semua orang. Yuk bergabung dan tumbuh bersama!
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px;">
+      <div style="background:#1a2236;border:1px solid #1e2d4a;border-radius:10px;padding:12px;">
+        <div style="font-size:18px;margin-bottom:4px;">📚</div>
+        <div style="font-size:0.78rem;font-weight:600;color:#e2e8f0;">Berbagi Ilmu</div>
+        <div style="font-size:0.72rem;color:#64748b;">Knowledge sharing rutin</div>
+      </div>
+      <div style="background:#1a2236;border:1px solid #1e2d4a;border-radius:10px;padding:12px;">
+        <div style="font-size:18px;margin-bottom:4px;">🤝</div>
+        <div style="font-size:0.78rem;font-weight:600;color:#e2e8f0;">Kolaborasi</div>
+        <div style="font-size:0.72rem;color:#64748b;">Proyek bareng komunitas</div>
+      </div>
+      <div style="background:#1a2236;border:1px solid #1e2d4a;border-radius:10px;padding:12px;">
+        <div style="font-size:18px;margin-bottom:4px;">🎯</div>
+        <div style="font-size:0.78rem;font-weight:600;color:#e2e8f0;">Networking</div>
+        <div style="font-size:0.72rem;color:#64748b;">Kenalan sesama techie</div>
+      </div>
+      <div style="background:#1a2236;border:1px solid #1e2d4a;border-radius:10px;padding:12px;">
+        <div style="font-size:18px;margin-bottom:4px;">✅</div>
+        <div style="font-size:0.78rem;font-weight:600;color:#e2e8f0;">Gratis</div>
+        <div style="font-size:0.72rem;color:#64748b;">100% open for everyone</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;">
+      <a href="./form.html" onclick="closeModal()" style="
+        flex:1;padding:12px;border-radius:10px;
+        background:linear-gradient(135deg,#3b82f6,#06b6d4);
+        color:#fff;text-decoration:none;
+        font-weight:600;font-size:0.875rem;
+        text-align:center;
+        box-shadow:0 0 20px rgba(59,130,246,0.25);">
+        Daftar Sekarang →
+      </a>
+      <button onclick="closeModal()" style="
+        padding:12px 20px;border-radius:10px;
+        background:transparent;border:1px solid #1e2d4a;
+        color:#94a3b8;font-size:0.875rem;
+        cursor:pointer;font-family:inherit;">
+        Nanti Dulu
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes slideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+</style>
+
+<script>
+  // ===== SHARED DATA STORE =====
+  // Simpan & ambil dari sessionStorage agar persists antar halaman
+  function getMembers() {
+    const stored = sessionStorage.getItem('tc_members');
+    if (stored) return JSON.parse(stored);
+
+    // Data awal (statis)
+    const defaultData = [
+      { nama: 'Andi Pratama',   email: 'andi@email.com',   minat: 'Web Development' },
+      { nama: 'Siti Nurhaliza', email: 'siti@email.com',   minat: 'UI/UX Design' },
+      { nama: 'Budi Santoso',   email: 'budi@email.com',   minat: 'Data Science' },
+      { nama: 'Dewi Anggraini', email: 'dewi@email.com',   minat: 'Cybersecurity' },
+      { nama: 'Rizky Fadhilah', email: 'rizky@email.com',  minat: 'Mobile Dev' },
+    ];
+    sessionStorage.setItem('tc_members', JSON.stringify(defaultData));
+    return defaultData;
+  }
+
+  const badgeMap = {
+    'Web Development': 'badge-blue',
+    'UI/UX Design':    'badge-purple',
+    'Data Science':    'badge-cyan',
+    'Cybersecurity':   'badge-red',
+    'Mobile Dev':      'badge-green',
+    'Game Dev':        'badge-yellow',
+  };
+
+  function renderTable() {
+    const members = getMembers();
+    const tbody = document.getElementById('memberTable');
+    document.getElementById('totalMember').textContent = members.length;
+
+    if (members.length === 0) {
+      tbody.innerHTML = `<tr class="empty-row"><td colspan="5">Belum ada anggota. <a href="./form.html" style="color:var(--accent)">Daftar sekarang!</a></td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = members.map((m, i) => {
+      const cls = badgeMap[m.minat] || 'badge-blue';
+      return `
+        <tr>
+          <td style="font-family:var(--mono);color:var(--text3);font-size:0.8rem;">${String(i+1).padStart(2,'0')}</td>
+          <td style="font-weight:500;">${m.nama}</td>
+          <td style="color:var(--text2);font-family:var(--mono);font-size:0.82rem;">${m.email}</td>
+          <td><span class="badge ${cls}">${m.minat}</span></td>
+          <td><span class="badge badge-green">Aktif</span></td>
+        </tr>`;
+    }).join('');
+  }
+
+  renderTable();
+
+  // ===== MODAL =====
+  function closeModal() {
+    const overlay = document.getElementById('modalOverlay');
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.2s';
+    setTimeout(() => overlay.style.display = 'none', 200);
+  }
+
+  // Klik di luar modal = tutup
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+</body>
+</html>

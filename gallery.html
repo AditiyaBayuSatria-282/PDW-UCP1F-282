@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Community — Galeri Multimedia</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-brand">
+    <span class="dot"></span>
+    Tech Community
+  </div>
+  <ul class="nav-links">
+    <li><a href="./index.html">Home</a></li>
+    <li><a href="./form.html">Daftar</a></li>
+    <li><a href="./gallery.html" class="active">Galeri</a></li>
+  </ul>
+</nav>
+
+<!-- GALLERY CONTAINER -->
+<div class="gallery-container">
+
+  <div style="margin-bottom:32px;">
+    <div class="hero-badge">📁 Multimedia Gallery</div>
+    <h2 style="font-size:1.8rem;font-weight:700;letter-spacing:-0.5px;margin-top:10px;">Konten & Media</h2>
+    <p style="color:var(--text2);margin-top:6px;font-size:0.9rem;">Galeri gambar, video pembelajaran, dan audio dari Tech Community.</p>
+  </div>
+
+  <div class="media-grid">
+
+    <!-- IMAGE CARD -->
+    <div class="media-card">
+      <div class="media-card-header">
+        <div class="icon icon-img">🖼️</div>
+        <span>image_gallery.jpg</span>
+      </div>
+      <div class="media-card-body">
+        <img
+          id="mainImg"
+          class="gallery-img"
+          src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"
+          alt="Tech Community Gallery">
+
+        <div style="margin-top:12px;margin-bottom:10px;">
+          <p id="imgCaption" style="font-size:0.8rem;color:var(--text2);font-family:var(--mono);">// Electronics & Circuit Board</p>
+        </div>
+
+        <div class="img-controls">
+          <img
+            class="img-thumb active"
+            src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=100&q=60"
+            alt="thumb1"
+            onclick="changeImg(0)">
+          <img
+            class="img-thumb"
+            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=100&q=60"
+            alt="thumb2"
+            onclick="changeImg(1)">
+          <img
+            class="img-thumb"
+            src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=100&q=60"
+            alt="thumb3"
+            onclick="changeImg(2)">
+          <img
+            class="img-thumb"
+            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=100&q=60"
+            alt="thumb4"
+            onclick="changeImg(3)">
+
+          <button
+            class="btn btn-ghost"
+            style="font-size:0.78rem;padding:6px 12px;margin-left:auto;"
+            onclick="showImgInfo()">
+            ℹ Info
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUDIO CARD -->
+    <div class="media-card">
+      <div class="media-card-header">
+        <div class="icon icon-aud">🎵</div>
+        <span>audio_player.mp3</span>
+      </div>
+      <div class="media-card-body">
+
+        <div class="audio-player">
+          <div class="audio-info">
+            <div class="audio-cover">🎧</div>
+            <div class="audio-meta">
+              <strong>Lo-Fi Study Beats</strong>
+              <span>Tech Community Radio</span>
+            </div>
+          </div>
+
+          <!-- Audio element - menggunakan audio publik dari Internet Archive -->
+          <audio id="myAudio" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            Browser tidak mendukung tag audio.
+          </audio>
+
+          <div class="audio-controls">
+            <button class="play-btn" id="playBtn" onclick="togglePlay()">▶</button>
+            <div class="progress-wrap" id="progressWrap" onclick="seekAudio(event)">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="time-display" id="timeDisplay">0:00</div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn btn-ghost" style="font-size:0.78rem;padding:6px 12px;" onclick="togglePlay()">⏯ Play/Pause</button>
+          <button class="btn btn-outline" style="font-size:0.78rem;padding:6px 12px;" onclick="stopAudio()">⏹ Stop</button>
+          <button class="btn btn-outline" style="font-size:0.78rem;padding:6px 12px;" onclick="audioInfo()">ℹ Info</button>
+        </div>
+
+        <div style="margin-top:16px;padding:12px;background:var(--bg3);border-radius:8px;font-size:0.78rem;color:var(--text3);font-family:var(--mono);">
+          <div id="audioStatus">status: stopped</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO CARD (full width) -->
+    <div class="media-card full">
+      <div class="media-card-header">
+        <div class="icon icon-vid">🎬</div>
+        <span>video_tutorial.iframe — YouTube Embed</span>
+      </div>
+      <div class="media-card-body">
+        <div class="iframe-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/pQN-pnXPaVg"
+            title="Tech Tutorial Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+          <div>
+            <p style="font-weight:600;font-size:0.9rem;">Tutorial: Web Development Basics</p>
+            <p style="font-size:0.8rem;color:var(--text3);margin-top:2px;">Sumber: YouTube • Tech Community Channel</p>
+          </div>
+          <button class="btn btn-ghost" style="font-size:0.78rem;padding:6px 14px;" onclick="videoInfo()">ℹ Detail Video</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Tech Community</span> — Open for everyone</p>
+</footer>
+
+<script>
+  // ===== IMAGE GALLERY =====
+  const images = [
+    {
+      src: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
+      caption: '// Electronics & Circuit Board',
+      info: 'Gambar 1: Electronics & Circuit Board\nSumber: Unsplash\nKategori: Hardware & Electronics'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80',
+      caption: '// Programming & Code',
+      info: 'Gambar 2: Programming & Code\nSumber: Unsplash\nKategori: Software Development'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80',
+      caption: '// Team Collaboration',
+      info: 'Gambar 3: Team Collaboration\nSumber: Unsplash\nKategori: Teamwork & Community'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80',
+      caption: '// Tech Workspace',
+      info: 'Gambar 4: Tech Workspace\nSumber: Unsplash\nKategori: Work Environment'
+    }
+  ];
+
+  let currentImg = 0;
+
+  function changeImg(index) {
+    currentImg = index;
+    document.getElementById('mainImg').src = images[index].src;
+    document.getElementById('imgCaption').textContent = images[index].caption;
+
+    // Update active thumb
+    document.querySelectorAll('.img-thumb').forEach((t, i) => {
+      t.classList.toggle('active', i === index);
+    });
+  }
+
+  function showImgInfo() {
+    alert('📸 INFO GAMBAR\n\n' + images[currentImg].info);
+  }
+
+
+  // ===== AUDIO PLAYER =====
+  const audio = document.getElementById('myAudio');
+  const playBtn = document.getElementById('playBtn');
+  const progressFill = document.getElementById('progressFill');
+  const timeDisplay = document.getElementById('timeDisplay');
+  const audioStatus = document.getElementById('audioStatus');
+
+  function togglePlay() {
+    if (audio.paused) {
+      audio.play();
+      playBtn.textContent = '⏸';
+      audioStatus.textContent = 'status: playing 🎵';
+    } else {
+      audio.pause();
+      playBtn.textContent = '▶';
+      audioStatus.textContent = 'status: paused ⏸';
+    }
+  }
+
+  function stopAudio() {
+    audio.pause();
+    audio.currentTime = 0;
+    playBtn.textContent = '▶';
+    progressFill.style.width = '0%';
+    timeDisplay.textContent = '0:00';
+    audioStatus.textContent = 'status: stopped ⏹';
+  }
+
+  function audioInfo() {
+    alert('🎵 INFO AUDIO\n\nJudul   : Lo-Fi Study Beats\nArtis   : SoundHelix\nFormat  : MP3\nDurasi  : ~7 menit\nSumber  : soundhelix.com (public domain)\n\nTip: Klik tombol Play untuk memulai!');
+  }
+
+  function seekAudio(e) {
+    const rect = document.getElementById('progressWrap').getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    if (audio.duration) {
+      audio.currentTime = ratio * audio.duration;
+    }
+  }
+
+  function formatTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${String(sec).padStart(2,'0')}`;
+  }
+
+  audio.addEventListener('timeupdate', () => {
+    if (audio.duration) {
+      const pct = (audio.currentTime / audio.duration) * 100;
+      progressFill.style.width = pct + '%';
+      timeDisplay.textContent = formatTime(audio.currentTime);
+    }
+  });
+
+  audio.addEventListener('ended', () => {
+    playBtn.textContent = '▶';
+    audioStatus.textContent = 'status: finished ✓';
+  });
+
+
+  // ===== VIDEO INFO =====
+  function videoInfo() {
+    alert('🎬 INFO VIDEO\n\nJudul   : Tutorial Web Development Basics\nPlatform: YouTube\nEmbed   : <iframe> tag\nURL     : youtube.com/embed/...\n\nVideo ini ditampilkan menggunakan elemen <iframe> yang disematkan langsung dari YouTube.');
+  }
+</script>
+</body>
+</html>

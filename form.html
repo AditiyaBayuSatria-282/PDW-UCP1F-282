@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Community — Daftar Anggota</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-brand">
+    <span class="dot"></span>
+    Tech Community
+  </div>
+  <ul class="nav-links">
+    <li><a href="./index.html">Home</a></li>
+    <li><a href="./form.html" class="active">Daftar</a></li>
+    <li><a href="./gallery.html">Galeri</a></li>
+  </ul>
+</nav>
+
+<!-- FORM -->
+<div class="form-container">
+
+  <div style="margin-bottom:28px;">
+    <a href="./index.html" class="btn btn-outline" style="font-size:0.82rem;padding:7px 14px;">← Kembali ke Home</a>
+  </div>
+
+  <div class="form-card">
+    <div class="form-header">
+      <h2>Daftar Anggota Baru</h2>
+      <p>Isi form di bawah ini untuk bergabung dengan Tech Community.</p>
+    </div>
+
+    <form id="registerForm" onsubmit="submitForm(event)">
+
+      <div class="form-group">
+        <label for="nama">nama_lengkap</label>
+        <input type="text" id="nama" placeholder="Masukkan nama lengkap kamu" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">alamat_email</label>
+        <input type="email" id="email" placeholder="contoh@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="minat">bidang_minat</label>
+        <select id="minat" required>
+          <option value="" disabled selected>— Pilih bidang minat —</option>
+          <option value="Web Development">💻 Web Development</option>
+          <option value="Mobile Dev">📱 Mobile Dev</option>
+          <option value="UI/UX Design">🎨 UI/UX Design</option>
+          <option value="Data Science">📊 Data Science</option>
+          <option value="Cybersecurity">🔐 Cybersecurity</option>
+          <option value="Game Dev">🎮 Game Dev</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" style="flex:1;">Daftar Sekarang →</button>
+        <button type="button" class="btn btn-danger" onclick="resetForm()">Reset</button>
+      </div>
+    </form>
+
+    <!-- RESULT BOX -->
+    <div class="result-box" id="resultBox">
+      <strong>✓ Pendaftaran Berhasil</strong>
+      <div id="resultContent"></div>
+    </div>
+  </div>
+
+  <!-- PREVIEW TABLE -->
+  <div style="margin-top:40px;" id="previewSection">
+    <div class="section-header" style="margin-bottom:16px;">
+      <div class="section-title">Data Tersimpan (Array)</div>
+      <span id="countBadge" style="font-size:0.78rem;font-family:var(--mono);color:var(--text3);"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Bidang Minat</th>
+          </tr>
+        </thead>
+        <tbody id="previewTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Tech Community</span> — Open for everyone</p>
+</footer>
+
+<script>
+  // ===== ARRAY penyimpanan sementara =====
+  let membersArray = [];
+
+  // Load dari sessionStorage jika ada
+  function loadFromStorage() {
+    const stored = sessionStorage.getItem('tc_members');
+    if (stored) membersArray = JSON.parse(stored);
+  }
+
+  function saveToStorage() {
+    sessionStorage.setItem('tc_members', JSON.stringify(membersArray));
+  }
+
+  // ===== SUBMIT FORM =====
+  function submitForm(event) {
+    event.preventDefault();
+
+    const nama  = document.getElementById('nama').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const minat = document.getElementById('minat').value;
+
+    // Buat objek data
+    const newMember = { nama, email, minat };
+
+    // Simpan ke array
+    membersArray.push(newMember);
+    saveToStorage();
+
+    // Tampilkan alert
+    alert(`✅ Pendaftaran Berhasil!\n\nNama   : ${nama}\nEmail  : ${email}\nMinat  : ${minat}\n\nKamu kini terdaftar sebagai anggota Tech Community! 🎉`);
+
+    // Tampilkan hasil di bawah form
+    const resultBox = document.getElementById('resultBox');
+    document.getElementById('resultContent').innerHTML = `
+      <div style="display:grid;gap:4px;margin-top:4px;">
+        <div><span style="color:var(--text3);font-size:0.78rem;font-family:var(--mono);">NAMA &nbsp;&nbsp;</span> ${nama}</div>
+        <div><span style="color:var(--text3);font-size:0.78rem;font-family:var(--mono);">EMAIL &nbsp;</span> ${email}</div>
+        <div><span style="color:var(--text3);font-size:0.78rem;font-family:var(--mono);">MINAT &nbsp;</span> ${minat}</div>
+      </div>`;
+    resultBox.classList.add('show');
+
+    // Update tabel preview
+    renderPreview();
+
+    // Reset form
+    event.target.reset();
+  }
+
+  function resetForm() {
+    document.getElementById('registerForm').reset();
+    document.getElementById('resultBox').classList.remove('show');
+  }
+
+  // ===== RENDER PREVIEW TABLE =====
+  function renderPreview() {
+    const tbody = document.getElementById('previewTable');
+    document.getElementById('countBadge').textContent = `${membersArray.length} entri`;
+
+    if (membersArray.length === 0) {
+      tbody.innerHTML = `<tr class="empty-row"><td colspan="4">Array masih kosong. Daftarkan anggota pertama!</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = membersArray.map((m, i) => `
+      <tr>
+        <td style="font-family:var(--mono);color:var(--text3);font-size:0.8rem;">${String(i+1).padStart(2,'0')}</td>
+        <td style="font-weight:500;">${m.nama}</td>
+        <td style="color:var(--text2);font-family:var(--mono);font-size:0.82rem;">${m.email}</td>
+        <td>${m.minat}</td>
+      </tr>`).join('');
+  }
+
+  // Init
+  loadFromStorage();
+  renderPreview();
+</script>
+</body>
+</html>
